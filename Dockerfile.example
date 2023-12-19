@@ -1,0 +1,11 @@
+#Dockerfile alternativo para ruby 2.3.3 e rails 5.0.1
+
+FROM rails:5.0.1
+
+# Atualizar os pacotes e instalar as dependências
+#RUN apt-get update -qy --force-yes --allow-unauthenticated
+
+# Limpar o cache do apt-get e outros arquivos temporários
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+CMD ["sh", "-c", "sleep infinity"]
