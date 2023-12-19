@@ -15,7 +15,8 @@ RUN apt-get install -qy --force-yes --no-install-recommends --allow-unauthentica
     libncurses5-dev  \
     libffi-dev  \
     libgdbm6  \
-    libpq-dev
+    libpq-dev \
+    nodejs
 
 # Instalar o Rails
 RUN /bin/bash -l -c "gem install rails -v 5.2.8"
