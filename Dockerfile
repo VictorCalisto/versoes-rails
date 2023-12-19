@@ -1,7 +1,7 @@
-FROM ruby:2.4.4
+FROM ruby:2.7.3
 
-# Atualizar os pacotes e instalar as dependências
-# RUN apt-get update -qy --force-yes --allow-unauthenticated
+# Atualizar os pacotes
+RUN apt-get update -qy --force-yes --allow-unauthenticated
 
 # Instala dependencias
 RUN apt-get install -qy --force-yes --no-install-recommends --allow-unauthenticated \
@@ -14,19 +14,20 @@ RUN apt-get install -qy --force-yes --no-install-recommends --allow-unauthentica
     zlib1g-dev  \
     libncurses5-dev  \
     libffi-dev  \
-    libgdbm3  \
+    libgdbm6  \
     libpq-dev
+
+# Instalar o Rails
+RUN /bin/bash -l -c "gem install rails -v 5.2.8"
+
+# Define o diretório de trabalho
+WORKDIR /app
 
 # Limpar o cache do apt-get e outros arquivos temporários
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Define o diretório de trabalho
-RUN mkdir -p app
-COPY Gemfile /app
-WORKDIR /app
-RUN bundle install
-
 # Tratamento de erros
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
-#ENTRYPOINT ["sh","/usr/local/bin/docker-entrypoint.sh"]
+ENTRYPOINT ["sh","/usr/local/bin/docker-entrypoint.sh"]
+#CMD ["sh", "-c", "sleep infinity"]
