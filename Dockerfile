@@ -1,4 +1,4 @@
-FROM ruby
+FROM ruby:2.7.0
 
 # Atualizar os pacotes e instalar as dependências
 RUN apt-get update -y
@@ -22,7 +22,8 @@ RUN apt-get install -qy --no-install-recommends \
     postgresql-client
 
 # Instalar o Rails
-RUN /bin/bash -l -c "gem install rails"
+RUN /bin/bash -l -c "gem install net-imap -v 0.3.7"
+RUN /bin/bash -l -c "gem install rails -v 6.0.3.2"
 
 # Define o diretório de trabalho
 WORKDIR /app
@@ -33,4 +34,5 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 # Tratamento de erros
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+#CMD ["sh", "-c", "sleep infinity"]
 ENTRYPOINT ["sh","/usr/local/bin/docker-entrypoint.sh"]
