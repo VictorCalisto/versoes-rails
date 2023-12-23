@@ -25,6 +25,10 @@ RUN apt-get install -qy --no-install-recommends \
 RUN /bin/bash -l -c "gem install net-imap -v 0.3.7"
 RUN /bin/bash -l -c "gem install rails -v 6.0.3.2"
 
+# Instalando NodeJS
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
+RUN apt-get install -y nodejs
+
 # Define o diretório de trabalho
 WORKDIR /app
 
