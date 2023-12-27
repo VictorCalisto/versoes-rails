@@ -38,6 +38,8 @@ else
   echo "Novo projeto Rails foi criado no diretório $diretorio."
 fi
 
+bundle exec rails webpacker:install
+
 # Limpa o PID
 rm -f /app/tmp/pids/server.pid
 echo "Arquivo server.pid deletado. Subindo servidor rails ...."

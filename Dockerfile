@@ -29,6 +29,13 @@ RUN /bin/bash -l -c "gem install rails -v 6.0.3.2"
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
 RUN apt-get install -y nodejs
 
+# Adicione a chave GPG do Yarn e configure o repositório
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+    && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+
+# Atualize novamente o índice de pacotes e instale o Yarn
+RUN apt-get update && apt-get install -y yarn
+
 # Define o diretório de trabalho
 WORKDIR /app
 
