@@ -1,4 +1,4 @@
-FROM ruby
+FROM ruby:3.2.2
 
 # Atualizar os pacotes e instalar as dependências
 RUN apt-get update -y
@@ -22,7 +22,7 @@ RUN apt-get install -qy --no-install-recommends \
     postgresql-client
 
 # Instalar o Rails
-RUN /bin/bash -l -c "gem install rails"
+RUN /bin/bash -l -c "gem install rails -v 7.1.2"
 
 # Define o diretório de trabalho
 WORKDIR /app
